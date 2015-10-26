@@ -3,6 +3,7 @@ package org.capgemini.bowling.bowlinggame;
 public class BowlingGameResultCalc implements BowlingGameResultCalculator {
 	Round firstRound;
 	Round currentRound;
+	int noOfFinishedRounds = 0;
 
 	public BowlingGameResultCalc() {
 		currentRound = new Round(1);
@@ -10,13 +11,14 @@ public class BowlingGameResultCalc implements BowlingGameResultCalculator {
 	}
 
 	public void roll(int numberOfPins) {
-		if (!currentRound.isFinished()) {
+		if (!currentRound.isFinished(noOfFinishedRounds)) {
 			currentRound.setNewRoll(numberOfPins);
 		} else {
-			Round round = new Round(currentRound.getNoOfRound() + 1);
+			Round round = new Round(noOfFinishedRounds + 1);
 			currentRound.setNextRound(round);
 			currentRound = round;
 			currentRound.setNewRoll(numberOfPins);
+			noOfFinishedRounds ++;
 		}
 	}
 
@@ -31,7 +33,7 @@ public class BowlingGameResultCalc implements BowlingGameResultCalculator {
 	}
 
 	public boolean isFinished() {
-		if(currentRound.getNoOfRound() == 10 && currentRound.isFinished())
+		if(noOfFinishedRounds == 10 && currentRound.isFinished(noOfFinishedRounds))
 			return true;
 		return false;
 	}
