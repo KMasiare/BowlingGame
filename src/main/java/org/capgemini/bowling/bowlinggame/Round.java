@@ -6,11 +6,9 @@ import java.util.List;
 public class Round {
 	private Round nextRound;
 	private List<Integer> rolls = new ArrayList<Integer>();
-	//private int noOfRound;
 
 	public Round(int noOfRound) {
 		nextRound = null;
-		//this.noOfRound = noOfRound;
 	}
 
 	public int getOneRoll() {
